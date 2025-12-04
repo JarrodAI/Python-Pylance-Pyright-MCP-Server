@@ -226,6 +226,10 @@
 
 
 
+
+
+
+
    What it does
 
    **Partially true, but there's a crucial difference:**
@@ -249,7 +253,7 @@
 **Real-world example:**
 
 **Without Pylance MCP:**
-that's why I am supposed to be deleted
+```
 User: "Rename the User class to UserAccount everywhere"
 
 Me: "Let me search for 'User'... I found it in 12 files. 
@@ -260,10 +264,10 @@ I'll replace all occurrences..."
 - User variable → UserAccount ❌ Broke local variable
 - "User" in string → "UserAccount" ❌ Broke database query
 - Used in comment → UserAccount ❌ Harmless but weird
-
+```
 
 **With Pylance MCP:**
-
+```
 User: "Rename the User class to UserAccount everywhere"
 
 Me: "Using rename_symbol tool..."
@@ -301,7 +305,7 @@ They **don't call it directly**. The AI assistant (Claude, Cursor, GitHub Copilo
 
 **Current User Experience:**
 
-
+```
 User: "Rename the User class to UserAccount everywhere"
 
 [Behind the scenes:]
@@ -314,17 +318,17 @@ User: "Rename the User class to UserAccount everywhere"
 7. AI tells user: "✅ Done! Renamed User → UserAccount in 47 locations"
 
 User just sees the result - they don't know MCP was involved.
-
+```
 
 **It's completely transparent to the user.** They just chat naturally:
 
-
+```
 User: "Add type hints to the calculate_total function"
 AI: [Internally uses get_hover, get_definition, type_check tools]
 AI: "Added type hints. Function signature is now: 
      def calculate_total(items: List[Item], tax_rate: float) -> Decimal"
 
-
+---
 
 User: "Find everywhere OrderStatus is used"
 AI: [Calls get_references tool]
@@ -334,7 +338,7 @@ AI: "OrderStatus is used in 23 locations:
      - src/utils.py (2 usages)
      ..."
 
-
+---
 
 User: "Are there any type errors in this file?"
 AI: [Calls type_check tool]
@@ -342,7 +346,7 @@ AI: "Found 3 type errors:
      Line 45: Argument type mismatch
      Line 67: Missing return type
      Line 89: Undefined variable 'usr'"
-
+```
 
 **The MCP Protocol handles everything:**
 
@@ -365,7 +369,7 @@ AI: "Found 3 type errors:
 python install.py
 # Restart editor
 # Done - AI now has Pylance powers
-
+```
 
 The beauty of MCP is that it's **invisible infrastructure**. Users just chat, AI uses the tools automatically.
 ```
